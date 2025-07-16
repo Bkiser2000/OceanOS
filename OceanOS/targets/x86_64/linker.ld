@@ -4,28 +4,25 @@ SECTIONS
 {
     . = 1M;
 
-    .boot : ALIGN(8)
-    {
+    /* Place multiboot header at the very beginning */
+    .multiboot_header ALIGN(8) : {
         KEEP(*(.multiboot_header))
     }
 
-    .text : ALIGN(4096)
-    {
-        *(.text)
+    .text ALIGN(4096) : {
+        *(.text*)
     }
 
-    .rodata : ALIGN(4096)
-    {
-        *(.rodata)
+    .rodata ALIGN(4096) : {
+        *(.rodata*)
     }
 
-    .data : ALIGN(4096)
-    {
-        *(.data)
+    .data ALIGN(4096) : {
+        *(.data*)
     }
 
-    .bss : ALIGN(4096)
-    {
-        *(.bss)
+    .bss ALIGN(4096) : {
+        *(.bss*)
+        *(COMMON)
     }
 }
